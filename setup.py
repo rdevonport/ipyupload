@@ -5,8 +5,9 @@
 # cf. https://pythonhosted.org/setuptools/setuptools.html
 
 # commands:
-# python setup.py sdist upload -r testpypi
-# python setup.py sdist upload -r pypi
+# python setup.py sdist
+# python setup.py bdist_wheel
+# twine upload dist/*
 
 
 from distutils.util import convert_path
@@ -15,7 +16,6 @@ from setuptools import setup, find_packages
 packages = find_packages()
 module = packages[0]
 print('module = {}'.format(module))
-
 
 meta_ns = {}
 ver_path = convert_path(module + '/__meta__.py')
@@ -26,6 +26,7 @@ name = meta_ns['__name__']
 packages = packages
 version = meta_ns['__version__']
 description = meta_ns['__description__']
+long_description = meta_ns['__long_description__']
 author = meta_ns['__author__']
 author_email = meta_ns['__author_email__']
 url = meta_ns['__url__']
@@ -46,15 +47,15 @@ with open('requirements.txt', 'r') as f:
 li_req = content.split('\n')
 install_requires = [e.strip() for e in li_req if len(e)]
 
-with open('README.md') as f:
-    long_description = f.read()
+# with open('README.md') as f:
+#     long_description = f.read()
+
 
 setup(
     name=name,
     version=version,
     description=description,
     long_description=long_description,
-    long_description_content_type="text/markdown",
     author=author,
     author_email=author_email,
     url=url,
