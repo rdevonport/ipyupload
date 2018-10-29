@@ -25,6 +25,7 @@ const FileUploadModel = widgets.DOMWidgetModel.extend(
                 accept: '',
                 disabled: false,
                 multiple: false,
+                style: '',
 
                 li_metadata: [],
                 li_content: [],
@@ -60,13 +61,18 @@ const FileUploadView = widgets.DOMWidgetView.extend({
         fileInput.className = 'jupyter-widget-file-upload';
         fileInput.id = `file_upload-${that._id}`;
         divNew.appendChild(fileInput);
+        that.fileInput = fileInput;
 
         const label = document.createElement('label');
         label.htmlFor = `file_upload-${that._id}`;
-        label.innerHTML = '<i class="fa fa-upload"></i>  Upload';
+        label.innerHTML = Utils.build_label_html(null);
         label.className = 'p-Widget jupyter-widgets jupyter-button widget-button';
-        label.style = this.model.get('style_button') || '';
+        label.style = this.model.get('style_button');
         divNew.appendChild(label);
+        if (this.model.get('disabled')) {
+            label.classList.add('disabled');
+        }
+        that.label = label;
 
         window.fileInput = fileInput;
 
@@ -79,7 +85,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
             window.fileInput = fileInput;
             console.log(`nb files = ${fileInput.files.length}`);
             const promisesFile = [];
-            Array.from(fileInput.files).map(file => {
+            Array.from(fileInput.files).forEach(file => {
                 console.log(file);
                 promisesFile.push(
                     new Promise((resolve, reject) => {
@@ -114,7 +120,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                     console.log(contents);
                     const li_metadata = [];
                     const li_buffer = [];
-                    contents.map(c => {
+                    contents.forEach(c => {
                         // console.log(c);
                         // let arrayInt8 = new Int8Array(c.buffer);
                         // let arrayUInt8 = new Uint8Array(c.buffer);
@@ -133,6 +139,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                         error: '',
                     });
                     that.touch();
+                    label.innerHTML = Utils.build_label_html(li_metadata.length);
                 })
                 .catch(err => {
                     console.error('error in file upload: %o', err);
@@ -142,10 +149,47 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                         error: err,
                     });
                     that.touch();
+                    label.innerHTML = Utils.build_label_html(null);
                 });
         });
 
+        that.model.on('change:accept', that.update_accept, that);
+        that.model.on('change:disabled', that.toggle_disabled, that);
+        that.model.on('change:multiple', that.update_multiple, that);
+        that.model.on('change:style_button', that.update_style_button, that);
+
         console.log('widget FileUpload ready');
+
+        // debug
+        // window.that = that;
+    },
+    update_accept() {
+        // console.log('in update_accept');
+        const that = this;
+        const accept = that.model.get('accept');
+        that.fileInput.accept = accept;
+    },
+    toggle_disabled() {
+        // console.log('in toggle_disabled');
+        const that = this;
+        const disabled = that.model.get('disabled');
+        if (disabled) {
+            that.label.classList.add('disabled');
+        } else {
+            that.label.classList.remove('disabled');
+        }
+    },
+    update_multiple() {
+        // console.log('in update_multiple');
+        const that = this;
+        const multiple = that.model.get('multiple');
+        that.fileInput.multiple = multiple;
+    },
+    update_style_button() {
+        // console.log('in update_style_button');
+        const that = this;
+        const style_button = that.model.get('style_button');
+        that.label.style = style_button;
     },
 });
 

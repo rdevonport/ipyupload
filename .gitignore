@@ -19,4 +19,4 @@ dist/
 */*.tgz
 package/
 
-# test-zone/web/
+test-zone/web/

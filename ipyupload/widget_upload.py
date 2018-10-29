@@ -33,6 +33,9 @@ class FileUpload(wg.DOMWidget):
     help = 'Enable or disable button.'
     disabled = Bool(False, help=help).tag(sync=True)
 
+    help = 'Optional style for button (label element)'
+    style_button = Unicode('', help=help).tag(sync=True)
+
     help = 'List of file metadata'
     li_metadata = List(Dict, help=help).tag(sync=True)
 
@@ -42,31 +45,31 @@ class FileUpload(wg.DOMWidget):
     help = 'Error message'
     error = Unicode('', help=help).tag(sync=True)
 
-    help = 'Optional style for button (label element)'
-    style_button = Unicode('', help=help).tag(sync=True)
-
-    result = Dict({}).tag(sync=False)
+    value = Dict({}).tag(sync=False)
 
     def __init__(self,
                  accept='',
                  multiple=False,
                  disabled=False,
                  style_button='',
-                 output=None,
-                 box=None,
                  ):
         """
         Instantiate widget
         """
 
+        if accept is None:
+            accept = ''
+
+        if style_button is None:
+            style_button = ''
+
         self._id = random.randint(0, int(1e9))
         self._counter = 0
+
         self.accept = accept
         self.disabled = disabled
         self.multiple = multiple
         self.style_button = style_button
-        self.output = output
-        self.box = box
 
         self.value = {}
 
@@ -86,14 +89,4 @@ class FileUpload(wg.DOMWidget):
             name = metadata['name']
             res[name] = {'metadata': metadata, 'content': content}
 
-        if self.output is not None:
-            if len(res) == 1:
-                msg = '1 file selected'
-            else:
-                msg = '{} files selected'.format(len(res))
-            self.output.value = msg
-
         self.value = res
-
-        if self.box is not None:
-            self.box.value = res

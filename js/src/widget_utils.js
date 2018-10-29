@@ -9,4 +9,18 @@ function show(name, variable) {
     console.log(variable);
 }
 
-export { serialize_content, show };
+function build_label_html(n) {
+    const icon = `<i class="fa fa-upload"></i>`;
+    const text = `Upload`;
+    let html = `${icon}  ${text}`;
+    if (n === 1) {
+        html += ` (${n} file)`;
+    }
+
+    if (n > 1) {
+        html += ` (${n} files)`;
+    }
+    return html;
+}
+
+export { serialize_content, show, build_label_html };
