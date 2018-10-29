@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/pypi/v/ipyupload.svg)](https://pypi.python.org/pypi/ipyupload/)
 [![Downloads](https://img.shields.io/pypi/dm/ipyupload.svg)](https://pypi.python.org/pypi/ipyupload/)
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ocoudray/jupyter-d3-slider-binder/master?filepath=Slider_d3_demo.ipynb)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gl/oscar6echo%2Fipyupload-repo2docker/master?filepath=demo-ipyupload.ipynb)
 
 ## 1 - Overview
 
