@@ -1,6 +1,7 @@
 from .__meta__ import __version__
 
 from .widget_upload import FileUpload
+from .widget_upload_box import FileUploadBox
 
 
 def _jupyter_nbextension_paths():

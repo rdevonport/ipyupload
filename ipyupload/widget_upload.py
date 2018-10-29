@@ -39,28 +39,34 @@ class FileUpload(wg.DOMWidget):
     help = 'List of file content (bytes)'
     li_content = List(Bytes, help=help).tag(sync=True, from_json=Util.content_from_json)
 
-    help = 'error message'
+    help = 'Error message'
     error = Unicode('', help=help).tag(sync=True)
+
+    help = 'Optional style for button (label element)'
+    style_button = Unicode('', help=help).tag(sync=True)
 
     result = Dict({}).tag(sync=False)
 
     def __init__(self,
-                 accept=None,
+                 accept='',
                  multiple=False,
                  disabled=False,
+                 style_button='',
+                 output=None,
+                 box=None,
                  ):
         """
         Instantiate widget
         """
-
-        if accept is None:
-            accept = ''
 
         self._id = random.randint(0, int(1e9))
         self._counter = 0
         self.accept = accept
         self.disabled = disabled
         self.multiple = multiple
+        self.style_button = style_button
+        self.output = output
+        self.box = box
 
         super().__init__()
 
@@ -83,4 +89,11 @@ class FileUpload(wg.DOMWidget):
             name = metadata['name']
             res[name] = {'metadata': metadata, 'content': content}
 
+        if self.output is not None:
+            msg = '{} files selected'.format(len(res))
+            self.output.value = msg
+
         self.result = res
+
+        if self.box is not None:
+            self.box.result = res

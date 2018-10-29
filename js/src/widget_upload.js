@@ -65,6 +65,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
         label.htmlFor = `file_upload-${that._id}`;
         label.innerHTML = '<i class="fa fa-upload"></i>  Upload';
         label.className = 'p-Widget jupyter-widgets jupyter-button widget-button';
+        label.style = this.model.get('style_button') || '';
         divNew.appendChild(label);
 
         window.fileInput = fileInput;
@@ -114,15 +115,11 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                     const li_metadata = [];
                     const li_buffer = [];
                     contents.map(c => {
-                        console.log(c);
-                        // console.log(c.metadata);
-                        // console.log(c.buffer);
+                        // console.log(c);
                         // let arrayInt8 = new Int8Array(c.buffer);
                         // let arrayUInt8 = new Uint8Array(c.buffer);
                         // console.log(JSON.stringify(arrayInt8));
                         // console.log(JSON.stringify(arrayUInt8));
-                        // let view = c.view;
-                        // console.log(view);
                         li_metadata.push(c.metadata);
                         li_buffer.push(c.buffer);
                     });
@@ -148,7 +145,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                 });
         });
 
-        console.log('done');
+        console.log('widget FileUpload ready');
     },
 });
 
