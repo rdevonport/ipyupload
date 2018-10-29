@@ -29,7 +29,7 @@ class FileUploadBox(wg.HBox):
         self.layout_box = layout_box
 
         self.output = self.build_widget_output()
-        self.result = {}
+        self.value = {}
 
         self.fu = FileUpload(
             accept=self.accept,

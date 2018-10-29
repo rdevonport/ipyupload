@@ -68,17 +68,14 @@ class FileUpload(wg.DOMWidget):
         self.output = output
         self.box = box
 
+        self.value = {}
+
         super().__init__()
 
     @observe('_counter')
     def on_incr_counter(self, change):
         """
         """
-        # print('do post processing')
-        # print('_counter={}'.format(self._counter))
-        # change2 = {k: v for k, v in change.items() if k != 'owner'}
-        # print('change (except prop "owner") = {}'.format(change2))
-
         res = {}
 
         msg = 'Error: length of li_metadata and li_content must be equal'
@@ -90,10 +87,13 @@ class FileUpload(wg.DOMWidget):
             res[name] = {'metadata': metadata, 'content': content}
 
         if self.output is not None:
-            msg = '{} files selected'.format(len(res))
+            if len(res) == 1:
+                msg = '1 file selected'
+            else:
+                msg = '{} files selected'.format(len(res))
             self.output.value = msg
 
-        self.result = res
+        self.value = res
 
         if self.box is not None:
-            self.box.result = res
+            self.box.value = res
