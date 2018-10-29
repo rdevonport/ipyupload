@@ -1,5 +1,9 @@
 # Jupyter custom ipywidget: **ipyupload**
 
+[![Latest Version](https://img.shields.io/pypi/v/ipyupload.svg)](https://pypi.python.org/pypi/ipyupload/)
+[![Downloads](https://img.shields.io/pypi/dm/ipyupload.svg)](https://pypi.python.org/pypi/ipyupload/)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ocoudray/jupyter-d3-slider-binder/master?filepath=Slider_d3_demo.ipynb)
+
 ## 1 - Overview
 
 This repo contains the source code and the building scripts for **ipyupload** a custom [ipywidget](https://ipywidgets.readthedocs.io/en/stable/).
