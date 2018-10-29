@@ -79,4 +79,7 @@ w = FileUpload(
 display(w)
 ```
 
-See the [demo notebook](https://nbviewer.jupyter.org/urls/gitlab.com/oscar6echo/ipyupload/raw/master/notebooks/demo-ipyupload.ipynb) for samples.
+For more examples:
+
+-   See the [demo notebook](https://nbviewer.jupyter.org/urls/gitlab.com/oscar6echo/ipyupload/raw/master/notebooks/demo-ipyupload.ipynb) on [nbviewer](https://nbviewer.jupyter.org/).
+-   Run it on [mybinder.org](https://mybinder.org/): [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gl/oscar6echo%2Fipyupload-repo2docker/master?filepath=demo-ipyupload.ipynb)
