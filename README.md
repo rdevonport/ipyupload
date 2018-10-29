@@ -75,4 +75,4 @@ w = FileUpload(
 display(w)
 ```
 
-See the [demo notebook](https://nbviewer.jupyter.org/urls/gitlab.com/oscar6echo/ipyupload/blob/master/notebooks/demo-ipyupload.ipynb) for samples.
+See the [demo notebook](https://nbviewer.jupyter.org/urls/gitlab.com/oscar6echo/ipyupload/raw/master/notebooks/demo-ipyupload.ipynb) for samples.
