@@ -32,10 +32,10 @@ Naturally such an upload widget is mostly useful in a widgetized notebook and/or
 From terminal:
 
 ```bash
-# for notebook > 5.3
+# for notebook >= 5.3
 $ pip install ipyupload
 
-# for notebook <=5.3
+# for notebook < 5.3
 $ pip install ipyupload
 $ jupyter nbextension install ipyupload --py --sys-prefix
 ```
@@ -75,4 +75,4 @@ w = FileUpload(
 display(w)
 ```
 
-See the [demo notebook]() for samples.
+See the [demo notebook](https://nbviewer.jupyter.org/urls/gitlab.com/oscar6echo/ipyupload/blob/master/notebooks/demo-ipyupload.ipynb) for samples.
