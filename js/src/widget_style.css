@@ -1,9 +1,0 @@
-.jupyter-widget-file-upload {
-    opacity: 0;
-    position: absolute;
-    z-index: -1;
-}
-
-.disabled {
-    pointer-events: none;
-}

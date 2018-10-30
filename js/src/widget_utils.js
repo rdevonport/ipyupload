@@ -9,7 +9,7 @@ function show(name, variable) {
     console.log(variable);
 }
 
-function build_label_html(n) {
+function build_btn_inner_html(n) {
     const icon = `<i class="fa fa-upload"></i>`;
     const text = `Upload`;
     let html = `${icon}  ${text}`;
@@ -23,4 +23,4 @@ function build_label_html(n) {
     return html;
 }
 
-export { serialize_content, show, build_label_html };
+export { serialize_content, show, build_btn_inner_html };

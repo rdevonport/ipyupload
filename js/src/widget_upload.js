@@ -4,7 +4,6 @@ import '@jupyter-widgets/controls/css/widgets.css';
 
 import { version } from '../package.json';
 import * as Utils from './widget_utils';
-import './widget_style.css';
 
 const semver_range = `~${version}`;
 
@@ -58,32 +57,31 @@ const FileUploadView = widgets.DOMWidgetView.extend({
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.multiple = that.model.get('multiple');
-        fileInput.className = 'jupyter-widget-file-upload';
-        fileInput.id = `file_upload-${that._id}`;
+        fileInput.style = 'display: none';
         divNew.appendChild(fileInput);
         that.fileInput = fileInput;
 
-        const label = document.createElement('label');
-        label.htmlFor = `file_upload-${that._id}`;
-        label.innerHTML = Utils.build_label_html(null);
-        label.className = 'p-Widget jupyter-widgets jupyter-button widget-button';
-        label.style = this.model.get('style_button');
-        divNew.appendChild(label);
-        if (this.model.get('disabled')) {
-            label.classList.add('disabled');
-        }
-        that.label = label;
+        const btn = document.createElement('button');
+        btn.innerHTML = Utils.build_btn_inner_html(null);
+        btn.className = 'p-Widget jupyter-widgets jupyter-button widget-button';
+        btn.disabled = this.model.get('disabled');
+        btn.style = this.model.get('style_button');
+        divNew.appendChild(btn);
+        that.btn = btn;
 
+        // debug
         window.fileInput = fileInput;
+
+        btn.addEventListener('click', () => {
+            fileInput.click();
+        });
 
         fileInput.addEventListener('click', () => {
             fileInput.value = '';
         });
 
         fileInput.addEventListener('change', () => {
-            console.log('new input');
-            window.fileInput = fileInput;
-            console.log(`nb files = ${fileInput.files.length}`);
+            console.log(`new input: nb files = ${fileInput.files.length}`);
             const promisesFile = [];
             Array.from(fileInput.files).forEach(file => {
                 console.log(file);
@@ -139,7 +137,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                         error: '',
                     });
                     that.touch();
-                    label.innerHTML = Utils.build_label_html(li_metadata.length);
+                    btn.innerHTML = Utils.build_btn_inner_html(li_metadata.length);
                 })
                 .catch(err => {
                     console.error('error in file upload: %o', err);
@@ -149,7 +147,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                         error: err,
                     });
                     that.touch();
-                    label.innerHTML = Utils.build_label_html(null);
+                    btn.innerHTML = Utils.build_btn_inner_html(null);
                 });
         });
 
@@ -161,35 +159,23 @@ const FileUploadView = widgets.DOMWidgetView.extend({
         console.log('widget FileUpload ready');
 
         // debug
-        // window.that = that;
+        window.that = that;
     },
     update_accept() {
         // console.log('in update_accept');
-        const that = this;
-        const accept = that.model.get('accept');
-        that.fileInput.accept = accept;
+        this.fileInput.accept = this.model.get('accept');
     },
     toggle_disabled() {
         // console.log('in toggle_disabled');
-        const that = this;
-        const disabled = that.model.get('disabled');
-        if (disabled) {
-            that.label.classList.add('disabled');
-        } else {
-            that.label.classList.remove('disabled');
-        }
+        this.btn.disabled = this.model.get('disabled');
     },
     update_multiple() {
         // console.log('in update_multiple');
-        const that = this;
-        const multiple = that.model.get('multiple');
-        that.fileInput.multiple = multiple;
+        this.fileInput.multiple = this.model.get('multiple');
     },
     update_style_button() {
         // console.log('in update_style_button');
-        const that = this;
-        const style_button = that.model.get('style_button');
-        that.label.style = style_button;
+        this.btn.style = this.model.get('style_button');
     },
 });
 
