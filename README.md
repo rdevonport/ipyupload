@@ -72,7 +72,7 @@ w = FileUpload(
     multiple=False, # default
     # True to disable the button else False to enable it
     disabled=False, # default
-    # CSS transparently passed to button (in a fact a button element)
+    # CSS transparently passed to button (a button element overlays the input[type=file] element for better styling)
     # e.g. 'color: darkblue; background-color: lightsalmon; width: 180px;'
     style_button='' # default
 )
