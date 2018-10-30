@@ -10,6 +10,8 @@ This repo contains the source code and the building scripts for **ipyupload** a 
 
 It enables to upload a file from a Jupyter notebook - classic or JupyterLab.
 
+![](img/demo-ipyupload.gif)
+
 It allows:
 
 -   single or multiple file upload
