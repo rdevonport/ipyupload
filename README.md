@@ -10,10 +10,8 @@ This repo contains the source code and the building scripts for **ipyupload** a 
 
 It enables to upload a file from a Jupyter notebook - classic or JupyterLab.
 
-<!-- ![](img/demo-ipyupload.gif) -->
-
 <div style="display:block; margin: 0 auto; text-align:center">
-<img src="img/demo-ipyupload.gif" width="500">
+<img src="img/demo-ipyupload.gif" width="700">
 </div>
 
 It allows:
