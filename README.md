@@ -28,6 +28,7 @@ Under the hood:
 -   The metadata are synced back as a `List(Dict)`.
 -   The file contents are synced back as a `List(Bytes)`.
 -   An `Int` counter is observed and upon change triggers the aggregation of the data and presentation to the user as a dict {filename: {metadata, file content in bytes}) in the `.value` property.
+-   Data can be compressed (optionally) from the browser (using [pako.deflate](https://nodeca.github.io/pako/#deflate)) to the Python kernel (using [zlib.decompress](https://docs.python.org/3/library/zlib.html)). 
 
 After an upload the button displays the number of files uploaded, to provide feedback to the user.
 
@@ -79,6 +80,9 @@ w = FileUpload(
     # CSS transparently passed to button (a button element overlays the input[type=file] element for better styling)
     # e.g. 'color: darkblue; background-color: lightsalmon; width: 180px;'
     style_button='' # default
+    # to compress data from browser to kernel
+    # compress level from 1 to 9 incl. - 0 for no compression
+    compress_level=0 # default
 )
 display(w)
 ```

@@ -1,4 +1,5 @@
 
+import zlib
 import ipywidgets as wg
 
 
@@ -11,4 +12,9 @@ class Util:
         """
         """
         from_json = wg.trait_types.bytes_serialization['from_json']
-        return [from_json(e, None) for e in value]
+        output = [from_json(e, None) for e in value]
+
+        if widget.compress_level > 0:
+            output = [zlib.decompress(e) for e in output]
+
+        return output

@@ -1,12 +1,5 @@
 function serialize_content(listBuffer) {
-    window.listBuffer = listBuffer;
-    const listCompressed = listBuffer.map(e => new DataView(e.slice(0)));
-    return listCompressed;
-}
-
-function show(name, variable) {
-    console.log(name);
-    console.log(variable);
+    return listBuffer.map(e => new DataView(e.slice(0)));
 }
 
 function build_btn_inner_html(n) {
@@ -23,4 +16,9 @@ function build_btn_inner_html(n) {
     return html;
 }
 
-export { serialize_content, show, build_btn_inner_html };
+function show(name, variable) {
+    console.log(name);
+    console.log(variable);
+}
+
+export { serialize_content, build_btn_inner_html, show };

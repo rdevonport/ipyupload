@@ -1,6 +1,7 @@
 import * as widgets from '@jupyter-widgets/base';
 import { extend } from 'lodash';
 import '@jupyter-widgets/controls/css/widgets.css';
+import * as pako from 'pako';
 
 import { version } from '../package.json';
 import * as Utils from './widget_utils';
@@ -25,6 +26,7 @@ const FileUploadModel = widgets.DOMWidgetModel.extend(
                 disabled: false,
                 multiple: false,
                 style: '',
+                compress_level: 0,
 
                 li_metadata: [],
                 li_content: [],
@@ -125,10 +127,16 @@ const FileUploadView = widgets.DOMWidgetView.extend({
                         // console.log(JSON.stringify(arrayInt8));
                         // console.log(JSON.stringify(arrayUInt8));
                         li_metadata.push(c.metadata);
-                        li_buffer.push(c.buffer);
+                        const compress_level = this.model.get('compress_level');
+                        if (compress_level > 0) {
+                            const compressed = pako.deflate(c.buffer, { level: compress_level });
+                            li_buffer.push(compressed.buffer);
+                        } else {
+                            li_buffer.push(c.buffer);
+                        }
                     });
-                    Utils.show('li_metadata', li_metadata);
-                    Utils.show('li_buffer', li_buffer);
+                    // Utils.show('li_metadata', li_metadata);
+                    // Utils.show('li_buffer', li_buffer);
                     that.counter += 1;
                     that.model.set({
                         _counter: that.counter,
@@ -160,6 +168,7 @@ const FileUploadView = widgets.DOMWidgetView.extend({
 
         // debug
         window.that = that;
+        window.pako = pako;
     },
     update_accept() {
         // console.log('in update_accept');

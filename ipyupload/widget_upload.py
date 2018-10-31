@@ -2,7 +2,7 @@
 import random
 import ipywidgets as wg
 
-from traitlets import observe, Unicode, Dict, List, Int, Bool, Bytes
+from traitlets import observe, validate, Unicode, Dict, List, Int, Bool, Bytes, TraitError
 
 from .util import Util
 from .__meta__ import __version_js__
@@ -36,11 +36,15 @@ class FileUpload(wg.DOMWidget):
     help = 'Optional style for button (label element)'
     style_button = Unicode('', help=help).tag(sync=True)
 
+    help = 'Compress level: from 1 to 9 - 0 for no compression'
+    compress_level = Int(0, help=help).tag(sync=True)
+
     help = 'List of file metadata'
     li_metadata = List(Dict, help=help).tag(sync=True)
 
     help = 'List of file content (bytes)'
-    li_content = List(Bytes, help=help).tag(sync=True, from_json=Util.content_from_json)
+    li_content = List(Bytes, help=help).tag(sync=True,
+                                            from_json=Util.content_from_json)
 
     help = 'Error message'
     error = Unicode('', help=help).tag(sync=True)
@@ -52,6 +56,7 @@ class FileUpload(wg.DOMWidget):
                  multiple=False,
                  disabled=False,
                  style_button='',
+                 compress_level=0,
                  ):
         """
         Instantiate widget
@@ -70,10 +75,17 @@ class FileUpload(wg.DOMWidget):
         self.disabled = disabled
         self.multiple = multiple
         self.style_button = style_button
+        self.compress_level = compress_level
 
         self.value = {}
 
         super().__init__()
+
+    @validate('compress_level')
+    def _valid_compress_level(self, proposal):
+        if proposal['value'] not in range(10):
+            raise TraitError('compress_level must be an int from 0 to 9 incl.')
+        return proposal['value']
 
     @observe('_counter')
     def on_incr_counter(self, change):
