@@ -1,6 +1,6 @@
 {
     "name": "ipyupload",
-    "version": "0.1.0",
+    "version": "0.1.3",
     "description": "A jupyter widget to upload file from browser to kernel",
     "author": "oscar6echo",
     "main": "dist/index.js",
