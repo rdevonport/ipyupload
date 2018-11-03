@@ -28,7 +28,7 @@ Under the hood:
 -   The metadata are synced back as a `List(Dict)`.
 -   The file contents are synced back as a `List(Bytes)`.
 -   An `Int` counter is observed and upon change triggers the aggregation of the data and presentation to the user as a dict {filename: {metadata, file content in bytes}) in the `.value` property.
--   Data can be compressed (optionally) from the browser (using [pako.deflate](https://nodeca.github.io/pako/#deflate)) to the Python kernel (using [zlib.decompress](https://docs.python.org/3/library/zlib.html)). 
+-   Data can be compressed (optionally) from the browser (using [pako.deflate](https://nodeca.github.io/pako/#deflate)) to the Python kernel (using [zlib.decompress](https://docs.python.org/3/library/zlib.html)).
 
 After an upload the button displays the number of files uploaded, to provide feedback to the user.
 
@@ -57,6 +57,7 @@ From terminal:
 $ git clone https://gitlab.com/oscar6echo/ipyupload.git
 $ cd ipyupload/js
 $ npm install
+$ npm run watch # in another terminal
 $ cd ..
 $ pip install -e .
 $ jupyter nbextension install --py --symlink --sys-prefix ipyupload

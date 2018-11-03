@@ -1,5 +1,11 @@
 import path from 'path';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import { version } from './package.json';
+
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
+console.log(`devMode=${devMode}`);
 
 // Custom webpack rules are generally the same for all webpack bundles, hence
 // stored in a separate local variable.
@@ -9,6 +15,20 @@ const rules = [
     { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
     { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
 ];
+
+const uglify = new UglifyJsPlugin({
+    // Compression specific options
+    uglifyOptions: {
+        // Eliminate comments
+        comments: false,
+        compress: {
+            // remove warnings
+            warnings: false,
+            // Drop console statements
+            drop_console: true,
+        },
+    },
+});
 
 const config = [
     {
@@ -44,7 +64,9 @@ const config = [
         module: {
             rules,
         },
-
+        optimization: {
+            minimizer: devMode ? [] : [uglify],
+        },
         externals: ['@jupyter-widgets/base', '@jupyter-widgets/controls'],
     },
     {
@@ -74,6 +96,9 @@ const config = [
         devtool: 'source-map',
         module: {
             rules,
+        },
+        optimization: {
+            minimizer: devMode ? [] : [uglify],
         },
         externals: ['@jupyter-widgets/base', '@jupyter-widgets/controls'],
     },
