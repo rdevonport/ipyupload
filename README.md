@@ -38,7 +38,9 @@ Naturally such an upload widget is mostly useful in a widgetized notebook and/or
 
 ## 2.1 - User Install
 
-From terminal:
+### 2.1.1 - Classic notebook
+
+From terminal assuming `notebook` is installed:
 
 ```bash
 # for notebook >= 5.3
@@ -49,9 +51,23 @@ $ pip install ipyupload
 $ jupyter nbextension install ipyupload --py --sys-prefix
 ```
 
+### 2.1.2 - JupyterLab
+
+From terminal assuming `jupyterlab` is installed:
+
+```bash
+# if not installed already
+$ jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
+$ jupyter labextension install ipyupload
+```
+
+
 ## 2.2 - Developer Install
 
-From terminal:
+### 2.1.1 - Classic notebook
+
+From terminal assuming `notebook` is installed:
 
 ```bash
 $ git clone https://gitlab.com/oscar6echo/ipyupload.git
@@ -63,6 +79,20 @@ $ pip install -e .
 $ jupyter nbextension install --py --symlink --sys-prefix ipyupload
 $ jupyter nbextension enable --py --sys-prefix ipyupload
 ```
+
+### 2.1.2 - JupyterLab
+
+
+From terminal assuming `notebook` is installed:
+
+```bash
+# if not installed already
+$ jupyter labextension install @jupyter-widgets/jupyterlab-manager
+
+# from folder ipyupload
+$ jupyter labextension link js
+```
+
 
 # 3 - Use
 
