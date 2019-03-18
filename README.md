@@ -65,7 +65,7 @@ $ jupyter labextension install ipyupload
 
 ## 2.2 - Developer Install
 
-### 2.1.1 - Classic notebook
+### 2.2.1 - Classic notebook
 
 From terminal assuming `notebook` is installed:
 
@@ -80,7 +80,7 @@ $ jupyter nbextension install --py --symlink --sys-prefix ipyupload
 $ jupyter nbextension enable --py --sys-prefix ipyupload
 ```
 
-### 2.1.2 - JupyterLab
+### 2.2.2 - JupyterLab
 
 
 From terminal assuming `jupyterlab` is installed:
