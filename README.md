@@ -83,7 +83,7 @@ $ jupyter nbextension enable --py --sys-prefix ipyupload
 ### 2.1.2 - JupyterLab
 
 
-From terminal assuming `notebook` is installed:
+From terminal assuming `jupyterlab` is installed:
 
 ```bash
 # if not installed already
