@@ -21,12 +21,10 @@ const uglify = new UglifyJsPlugin({
     uglifyOptions: {
         // Eliminate comments
         comments: false,
-        compress: {
-            // remove warnings
-            warnings: false,
-            // Drop console statements
-            drop_console: true,
-        },
+        // remove warnings
+        warnings: false,
+        // Drop console statements
+        drop_console: true,
     },
 });
 
